@@ -15,6 +15,10 @@
 		F72E11531C5973A7009BAEB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F72E11511C5973A7009BAEB2 /* LaunchScreen.storyboard */; };
 		F72E115E1C5973A7009BAEB2 /* SimpleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E115D1C5973A7009BAEB2 /* SimpleTests.m */; };
 		F72E11691C5973A7009BAEB2 /* SimpleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E11681C5973A7009BAEB2 /* SimpleUITests.m */; };
+		F72E117C1C598E3E009BAEB2 /* XYZEtudiant.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E11791C598E3E009BAEB2 /* XYZEtudiant.m */; };
+		F72E117D1C598E3E009BAEB2 /* XYZFormateur.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E117A1C598E3E009BAEB2 /* XYZFormateur.m */; };
+		F72E117E1C598E3E009BAEB2 /* XYZPersonne.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E117B1C598E3E009BAEB2 /* XYZPersonne.m */; };
+		F72E11811C59998F009BAEB2 /* Salle.m in Sources */ = {isa = PBXBuildFile; fileRef = F72E11801C59998F009BAEB2 /* Salle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		F72E11641C5973A7009BAEB2 /* SimpleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72E11681C5973A7009BAEB2 /* SimpleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleUITests.m; sourceTree = "<group>"; };
 		F72E116A1C5973A7009BAEB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F72E11761C598E09009BAEB2 /* XYZPersonne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZPersonne.h; path = ../../test/test/XYZPersonne.h; sourceTree = "<group>"; };
+		F72E11771C598E3E009BAEB2 /* XYZFormateur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZFormateur.h; path = ../../test/XYZFormateur.h; sourceTree = "<group>"; };
+		F72E11781C598E3E009BAEB2 /* XYZEtudiant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYZEtudiant.h; path = ../../test/test/XYZEtudiant.h; sourceTree = "<group>"; };
+		F72E11791C598E3E009BAEB2 /* XYZEtudiant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZEtudiant.m; path = ../../test/test/XYZEtudiant.m; sourceTree = "<group>"; };
+		F72E117A1C598E3E009BAEB2 /* XYZFormateur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZFormateur.m; path = ../../test/XYZFormateur.m; sourceTree = "<group>"; };
+		F72E117B1C598E3E009BAEB2 /* XYZPersonne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYZPersonne.m; path = ../../test/XYZPersonne.m; sourceTree = "<group>"; };
+		F72E117F1C59998F009BAEB2 /* Salle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Salle.h; sourceTree = "<group>"; };
+		F72E11801C59998F009BAEB2 /* Salle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Salle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +115,17 @@
 			children = (
 				F72E11461C5973A7009BAEB2 /* AppDelegate.h */,
 				F72E11471C5973A7009BAEB2 /* AppDelegate.m */,
+				F72E11761C598E09009BAEB2 /* XYZPersonne.h */,
+				F72E11771C598E3E009BAEB2 /* XYZFormateur.h */,
+				F72E11781C598E3E009BAEB2 /* XYZEtudiant.h */,
+				F72E11791C598E3E009BAEB2 /* XYZEtudiant.m */,
+				F72E117A1C598E3E009BAEB2 /* XYZFormateur.m */,
+				F72E117B1C598E3E009BAEB2 /* XYZPersonne.m */,
 				F72E11491C5973A7009BAEB2 /* ViewController.h */,
 				F72E114A1C5973A7009BAEB2 /* ViewController.m */,
 				F72E114C1C5973A7009BAEB2 /* Main.storyboard */,
+				F72E117F1C59998F009BAEB2 /* Salle.h */,
+				F72E11801C59998F009BAEB2 /* Salle.m */,
 				F72E114F1C5973A7009BAEB2 /* Assets.xcassets */,
 				F72E11511C5973A7009BAEB2 /* LaunchScreen.storyboard */,
 				F72E11541C5973A7009BAEB2 /* Info.plist */,
@@ -270,9 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F72E11811C59998F009BAEB2 /* Salle.m in Sources */,
 				F72E114B1C5973A7009BAEB2 /* ViewController.m in Sources */,
+				F72E117C1C598E3E009BAEB2 /* XYZEtudiant.m in Sources */,
+				F72E117D1C598E3E009BAEB2 /* XYZFormateur.m in Sources */,
 				F72E11481C5973A7009BAEB2 /* AppDelegate.m in Sources */,
 				F72E11451C5973A7009BAEB2 /* main.m in Sources */,
+				F72E117E1C598E3E009BAEB2 /* XYZPersonne.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
