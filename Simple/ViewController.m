@@ -7,13 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "DetailViewController.h"
 
-
-@interface ViewController ()
-
+@interface ViewController () <UIImagePickerControllerDelegate>
 @end
 
 @implementation ViewController
+    NSArray *tableData; //pour la tableView des personne
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,6 +21,13 @@
     NSLog(@"La vue est chargée");
     [self.maLabel setText:@"Hello from ViewDidLoad"];
     self.salle=     [[Salle alloc]init];
+}
+
+-(void)loadView {
+    [super loadView];
+   self.VoirListePersonuibutton.layer.cornerRadius = 10; // this value vary as per your desire
+    self.VoirListePersonuibutton.clipsToBounds = YES;
+    self.VoirListePersonuibutton.backgroundColor=   [UIColor yellowColor] ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,8 +90,67 @@
     }
 }
 
-- (IBAction)sauver:(UIButton *)sender {    
+- (IBAction)sauver:(UIButton *)sender {
+    NSLog(@"je clique d-save");
     [self.salle saveData];
+}
+
+- (IBAction)chargeImage:(UIButton *)sender {
+    UIImagePickerController *picker=    [[UIImagePickerController alloc] init];
+    picker.delegate=    self;
+    picker.allowsEditing=   YES;
+    picker.sourceType=  UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *choosenImage=  info[UIImagePickerControllerEditedImage];
+    self.monOmageImageView.image=   choosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+       [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (IBAction)ViewListOfPerson:(UIButton *)sender {
+    [self.salle showListOfPerson];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if( [segue.identifier isEqualToString:@"segueDetails" ]) {
+        // la personne
+        XYZPersonne *unePersonne;
+        // la personne est participant
+        if(self.monSwitch.on) {
+            unePersonne= [[XYZEtudiant alloc] init];
+        } else {
+            // la personne est formateur
+            unePersonne= [[XYZFormateur alloc] init];
+        }
+        
+        //  renseigner les champs de la personne
+        [unePersonne setNom:     self.lenom.text];
+        [unePersonne setPrenom:  self.leprenom.text];
+        
+        // sauver image sur disque
+        NSString *documentDirectory= [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask , YES) lastObject];
+        NSString    *guiid= [[NSUUID new] UUIDString];
+        NSString    *filePath=  [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", guiid]];
+        UIImage *choosenImage=   self.monOmageImageView.image;
+        NSData *imageData=  UIImagePNGRepresentation(choosenImage);
+        BOOL result=    [imageData writeToFile:filePath atomically:YES];
+        [unePersonne setPhoto:guiid];
+             
+        //  ajouter la personne dans la salle
+        [self.salle addPerson: unePersonne];
+        [self.salle saveData];
+        DetailViewController *detailVC= segue.destinationViewController;
+        detailVC.person=    unePersonne;
+        
+    }
 }
 
 @end

@@ -96,7 +96,16 @@
 
 }
 
-
+-(void)showListOfPerson {
+    NSLog(@".");
+    NSLog(@"----- Liste des Personnes ---------------");
+    for(XYZEtudiant *etud in self.etudiants) {
+        NSLog(@"Etudiant : %@, %@", etud.nom, etud.prenom);
+    }
+    for(XYZFormateur *form in self.formateurs) {
+        NSLog(@"Formateur : %@, %@", form.nom, form.prenom);
+    }
+}
 
 
 -(int)effectifs {

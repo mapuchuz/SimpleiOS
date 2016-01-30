@@ -29,4 +29,6 @@
 
 -(void)loadData;
 
+-(void)showListOfPerson;
+
 @end
