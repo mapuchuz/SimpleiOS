@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Salle.h"
+#import "XYZSalle.h"
 
 @interface ViewController : UIViewController
 
@@ -22,12 +22,15 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *monSwitch;
 
-@property (strong, nonatomic) Salle *salle;
+@property (strong, nonatomic) XYZSalle *salle;
 
 @property (weak, nonatomic) IBOutlet UIButton *VoirListePersonuibutton;
 
 @property (weak, nonatomic) IBOutlet UITableView *maTable;
 @property (weak, nonatomic) IBOutlet UIImageView *monOmageImageView;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typePersonneSegmentUI;
+- (IBAction)typePersonneUISegments:(UISegmentedControl *)sender;
 
 - (IBAction)typePersonne:(UISwitch *)sender;
 - (IBAction)Valider:(UIButton *)sender;

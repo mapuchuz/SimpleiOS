@@ -1,0 +1,54 @@
+
+/* Class = "UIButton"; normalTitle = "Ajoute une image"; ObjectID = "63v-Qd-zHm"; */
+"63v-Qd-zHm.normalTitle" = "Ajoute une image";
+
+/* Class = "UIViewController"; title = "formulaire"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "formulaire";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "ChN-ls-7Ge"; */
+"ChN-ls-7Ge.text" = "Subtitle";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "E2B-09-Ucw"; */
+"E2B-09-Ucw.placeholder" = "Nom";
+
+/* Class = "UISegmentedControl"; EIk-YQ-wUh.segmentTitles[0] = "Etudiant"; ObjectID = "EIk-YQ-wUh"; */
+"EIk-YQ-wUh.segmentTitles[0]" = "Etudiant";
+
+/* Class = "UISegmentedControl"; EIk-YQ-wUh.segmentTitles[1] = "Formateur"; ObjectID = "EIk-YQ-wUh"; */
+"EIk-YQ-wUh.segmentTitles[1]" = "Formateur";
+
+/* Class = "UISegmentedControl"; EIk-YQ-wUh.segmentTitles[2] = "Intervenant"; ObjectID = "EIk-YQ-wUh"; */
+"EIk-YQ-wUh.segmentTitles[2]" = "Intervenant";
+
+/* Class = "UINavigationItem"; title = "Formulaire"; ObjectID = "ElB-gA-8Qk"; */
+"ElB-gA-8Qk.title" = "Formulaire";
+
+/* Class = "UILabel"; text = "Participant"; ObjectID = "OTY-5W-BDB"; */
+"OTY-5W-BDB.text" = "Participant";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "PEp-AW-37k"; */
+"PEp-AW-37k.text" = "Status";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Vte-gV-aVv"; */
+"Vte-gV-aVv.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Formulaire"; ObjectID = "foB-5A-0nC"; */
+"foB-5A-0nC.title" = "Formulaire";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "oBU-J9-95x"; */
+"oBU-J9-95x.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Prenom"; ObjectID = "oca-PO-xCp"; */
+"oca-PO-xCp.placeholder" = "Prenom";
+
+/* Class = "UILabel"; text = "Prénom"; ObjectID = "pmn-SX-Tuh"; */
+"pmn-SX-Tuh.text" = "Prénom";
+
+/* Class = "UILabel"; text = "Formular for adeding a person"; ObjectID = "xOq-Cp-aTb"; */
+"xOq-Cp-aTb.text" = "Formular for adeding a person";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "yAx-m5-m8n"; */
+"yAx-m5-m8n.title" = "Save";
+
+/* Class = "UILabel"; text = "Nom"; ObjectID = "zTT-Bg-rjX"; */
+"zTT-Bg-rjX.text" = "Nom";

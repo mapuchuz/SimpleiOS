@@ -10,12 +10,16 @@
 #import "XYZPersonne.h"
 #import "XYZFormateur.h"
 #import "XYZEtudiant.h"
+#import "XYZIntervenant.h"
 
-@interface Salle : NSObject
+@interface XYZSalle : NSObject
 
-@property  NSMutableDictionary *dicoPersonnes;
-@property  NSArray *etudiants;
-@property  NSArray *formateurs;
+//@property  NSMutableDictionary *dicoPersonnes;
+//@property  NSArray *etudiants;
+//@property  NSArray *formateurs;
+@property  NSArray *personnes;
+
++(id)sharedSalle;
 
 -(void)addPerson : (XYZPersonne *)personne;
 
@@ -23,12 +27,16 @@
 
 -(id)init;
 
--(int)effectifs;
-
 -(void)saveData;
 
 -(void)loadData;
 
 -(void)showListOfPerson;
+
+-(void)removeAtIndex: (NSUInteger)index;
+
+-(NSArray *)getEtudiants;
+
+-(XYZPersonne *)getPersonneFromId:(NSUInteger)index;
 
 @end

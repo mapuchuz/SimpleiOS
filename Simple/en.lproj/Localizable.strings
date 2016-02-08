@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Simple
+
+  Created by vdemolombe on 01/02/2016.
+  Copyright © 2016 vdemolombe. All rights reserved.
+*/
+
+
+"key_etudiant"= "Student";
+"key_formateur"= "Teacher";
+"key_intervenant"= "Speaker";

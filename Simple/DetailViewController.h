@@ -10,13 +10,13 @@
 #import "XYZPersonne.h"
 #import "XYZEtudiant.h"
 #import "XYZFormateur.h"
-
+#import "XYZIntervenant.h"
 
 @interface DetailViewController : UIViewController
 
 - (IBAction)RetourBtn:(UIButton *)sender;
 
-@property XYZPersonne *person;
+@property XYZPersonne *personneAAfficher;
 @property (weak, nonatomic) IBOutlet UILabel *nomLabel;
 @property (weak, nonatomic) IBOutlet UILabel *prenomLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;

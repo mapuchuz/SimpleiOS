@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Salle.h"
+#import "XYZSalle.h"
+
 
 @interface TableViewController : UITableViewController
 
-@property (strong, nonatomic) Salle *salle;
+@property (strong, nonatomic) XYZSalle *salle;
 
-@property (strong, nonatomic) NSArray *personnes;
+//@property (strong, nonatomic) NSArray *personnes;
 
 @property XYZPersonne *person;
+
 
 @end

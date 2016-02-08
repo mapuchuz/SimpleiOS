@@ -7,6 +7,9 @@
 //
 
 #import "TableViewController.h"
+#import "XYZCellCustomeTableViewCell.h"
+#import "DetailViewController.h"
+
 
 @interface TableViewController ()
 
@@ -19,22 +22,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    UIActivityIndicatorView *av =   [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    av.center=self.view.center;
+    av.color=   [UIColor blueColor];
+    [av startAnimating];
+    [self.view addSubview:av];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    #pragma mark - threader un bout de code
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+
+                    self.salle=   [XYZSalle sharedSalle];//  [[XYZSalle alloc] init];
+   
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"Pépé a fait.");
+            [av stopAnimating];
+            [self.tableView reloadData];
+        });
+    });
+
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.salle=     [[Salle alloc] init];
-    NSMutableArray *tmp=    [[NSMutableArray alloc] init];
-    for(XYZEtudiant *toto in self.salle.etudiants) {
-        [tmp addObject:toto];
-    }
-    for(XYZFormateur *toto in self.salle.formateurs) {
-        [tmp addObject:toto];
-    }
-    self.personnes= [tmp copy];
-    NSLog(@"check %lu, %lu", ([self.salle.etudiants count] + [self.salle.formateurs count]), [self.personnes count]);
+    self.refreshControl=    [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor=    [UIColor purpleColor];
+    self.refreshControl.tintColor=          [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(refreshMe) forControlEvents:UIControlEventValueChanged];
+    
+    
+}
+
+-(void)refreshMe {
+    
+     self.salle=  [XYZSalle sharedSalle];
+   
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
+
+-(void)viewWillAppear:(BOOL)totoYES {
+//    self.salle=     [XYZSalle sharedSalle];
+   [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,33 +75,61 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ([self.salle.etudiants count] + [self.salle.formateurs count]);
+    return self.salle.personnes.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellPerson" forIndexPath:indexPath];
     
-    XYZPersonne *personne=  [self.personnes objectAtIndex:indexPath.row];
+//    XYZPersonne *personne=  [self.salle.personnes objectAtIndex:indexPath.row];
+    XYZPersonne *personne= [[XYZSalle sharedSalle] getPersonneFromId:indexPath.row];
+    
+    
+    //  si étudiant
+    if([personne isKindOfClass:[XYZEtudiant class]]) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellCustome" forIndexPath:indexPath];
+
+        ((XYZCellCustomeTableViewCell *)cell).texteCellCustom.text=
+            [NSString stringWithFormat:@"%@ %@", personne.nom, personne.prenom];
+        
+         ((XYZCellCustomeTableViewCell *)cell).imageCellCustom.image=  [UIImage imageWithContentsOfFile:personne.getPhoto];
+        
+        ((XYZCellCustomeTableViewCell *)cell).typeCustomUILabel.text=
+                NSLocalizedString(@"key_etudiant",nil);
+        
+        return cell;
+        
+    } else {
+    
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellPerson" forIndexPath:indexPath];
+    
     cell.textLabel.text=    [NSString stringWithFormat:@"%@ %@", personne.nom, personne.prenom];
     // Configure the cell...
     if([personne isKindOfClass:[XYZEtudiant class]]) {
-        cell.detailTextLabel.text=  @"Etudiant";
+        cell.detailTextLabel.text= NSLocalizedString(@"key_etudiant",nil);
     }
     if([personne isKindOfClass:[XYZFormateur class]]) {
-        cell.detailTextLabel.text=  @"Formateur";
+        cell.detailTextLabel.text=  NSLocalizedString(@"key_formateur",nil);
     }
-    NSString    *guid=  personne.photo;
-    NSLog(@"image : %@", personne.photo);
-    NSString *documentDirectory= [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask , YES) lastObject];
-    NSString    *filePath=  [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", guid]];
-    cell.imageView.image=  [UIImage imageWithContentsOfFile:filePath];
+    if([personne isKindOfClass:[XYZIntervenant class]]) {
+        cell.detailTextLabel.text=  NSLocalizedString(@"key_intervenant",nil);
+    }
 
-    
+    cell.imageView.image=  [UIImage imageWithContentsOfFile:personne.getPhoto];
+        
     return cell;
+    }
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+     XYZPersonne *personne=  [self.salle.personnes objectAtIndex:indexPath.row];
+    if([personne isKindOfClass:[XYZEtudiant class]]) {
+        return 150;
+    } else {
+        return 50;
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,17 +138,21 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+
+        //[self.salle removeAtIndex:indexPath.row];
+        [[XYZSalle sharedSalle] removeAtIndex:indexPath.row];
+        
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -125,8 +183,10 @@
     if( [segue.identifier isEqualToString:@"segueTableDetail" ]) {
         
         NSIndexPath *ip=    [self.tableView indexPathForSelectedRow];
-        TableViewController *detailVC= segue.destinationViewController;
-        detailVC.person=    [self.personnes objectAtIndex:ip.row];
+        
+        //Destination du segue
+        DetailViewController *detailVC= segue.destinationViewController;
+        detailVC.personneAAfficher=    [self.salle.personnes objectAtIndex:ip.row];
         
     }
 }

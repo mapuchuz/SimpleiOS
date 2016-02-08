@@ -18,9 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"La vue est chargée");
     [self.maLabel setText:@"Hello from ViewDidLoad"];
-    self.salle=     [[Salle alloc]init];
+    self.salle=     [XYZSalle sharedSalle];
 }
 
 -(void)loadView {
@@ -50,6 +49,9 @@
 
 
 
+- (IBAction)typePersonneUISegments:(UISegmentedControl *)sender {
+}
+
 - (IBAction)typePersonne:(UISwitch *)sender {
     NSLog(@"Switch");
     if(sender.on) {
@@ -68,13 +70,18 @@
         // la personne
         XYZPersonne *unePersonne;
         // la personne est participant
-        if(self.monSwitch.on) {
-            unePersonne= [[XYZEtudiant alloc] init];
-        } else {
-        // la personne est formateur
-            unePersonne= [[XYZFormateur alloc] init];
-        }
-
+       switch( self.typePersonneSegmentUI.selectedSegmentIndex ) {
+           case 0 :
+               unePersonne= [[XYZEtudiant alloc] init];
+               break;
+           case 1:
+               unePersonne= [[XYZFormateur alloc] init];
+               break;
+           case 2:
+               unePersonne= [[XYZIntervenant alloc] init];
+               break;
+       }
+        
         //  renseigner les champs de la personne
         [unePersonne setNom:     self.lenom.text];
         [unePersonne setPrenom:  self.leprenom.text];
@@ -123,12 +130,17 @@
     if( [segue.identifier isEqualToString:@"segueDetails" ]) {
         // la personne
         XYZPersonne *unePersonne;
-        // la personne est participant
-        if(self.monSwitch.on) {
-            unePersonne= [[XYZEtudiant alloc] init];
-        } else {
-            // la personne est formateur
-            unePersonne= [[XYZFormateur alloc] init];
+        
+        switch( self.typePersonneSegmentUI.selectedSegmentIndex ) {
+            case 0 :
+                unePersonne= [[XYZEtudiant alloc] init];
+                break;
+            case 1:
+                unePersonne= [[XYZFormateur alloc] init];
+                break;
+            case 2:
+                unePersonne= [[XYZIntervenant alloc] init];
+                break;
         }
         
         //  renseigner les champs de la personne
@@ -148,7 +160,7 @@
         [self.salle addPerson: unePersonne];
         [self.salle saveData];
         DetailViewController *detailVC= segue.destinationViewController;
-        detailVC.person=    unePersonne;
+        detailVC.personneAAfficher=    unePersonne;
         
     }
 }

@@ -17,18 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.nomLabel setText:self.person.nom];
-    [self.prenomLabel setText:self.person.prenom];
+    [self.nomLabel setText:self.personneAAfficher.nom];
+    [self.prenomLabel setText:self.personneAAfficher.prenom];
     //  afficher la photo de la personne
-    NSString    *guid=  self.person.photo;
+    NSString    *guid=  self.personneAAfficher.photo;
     NSString *documentDirectory= [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask , YES) lastObject];
     NSString    *filePath=  [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", guid]];
     self.imageUIimage.image=  [UIImage imageWithContentsOfFile:filePath];
     //  afficher le type de la personne(etudiant ou formateur)
     NSString *montype;
-    if( [self.person isKindOfClass:[XYZEtudiant class]] ) { montype=@"Etudiant"; }
-    if( [self.person isKindOfClass:[XYZFormateur class]] ) { montype=@"Formateur"; }
-    [self.statusLabel setText:montype];    
+    if( [self.personneAAfficher isKindOfClass:[XYZEtudiant class]] ) { montype=  NSLocalizedString(@"key_etudiant", nil);}
+    if( [self.personneAAfficher isKindOfClass:[XYZFormateur class]] ) { montype= NSLocalizedString(@"key_formateur", nil);}
+    if( [self.personneAAfficher isKindOfClass:[XYZIntervenant class]] ) { montype=  NSLocalizedString(@"key_intervenant", nil);}
+    [self.statusLabel setText:montype];
 }
 
 - (void)didReceiveMemoryWarning {
